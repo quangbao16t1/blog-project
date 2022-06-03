@@ -63,22 +63,6 @@ UserRepository.createUsers = async (user) => {
     await userCreate.save();
 }
 
-UserRepository.login = async (email, password) => {
-
-    const user = await UserModel.findOne({ where: { email: email } });
-
-    console.log(user.passwordHash);
-    console.log(user);
-
-    if (user && bcrypt.compareSync(password, user.passwordHash)) {
-        const token = jwt.sign({ sub: user.id }, Auth.secret, { expiresIn: '7d' });
-        return {
-            ...user.toJSON(),
-            token
-        };
-    }
-}
-
 UserRepository.searchUsers = async (search) => {
     return await UserModel.findOne({
         where: { lastName: search },

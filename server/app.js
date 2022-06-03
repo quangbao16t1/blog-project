@@ -9,6 +9,7 @@ import postRouter from "./src/routes/post.routes.js";
 import rateRouter from "./src/routes/rate.routes.js";
 import bookmarkRouter from "./src/routes/bookmark.routes.js";
 import commentRouter from "./src/routes/comment.routes.js";
+import apiRouter from "./src/routes/index.js";
 
 
 dotenv.config();
@@ -33,11 +34,13 @@ app.use(bodyParser.urlencoded({
        extended: true
 }));
 
-app.use('/', userRouter)
-app.use('/', postRouter)
-app.use('/', rateRouter)
-app.use('/', bookmarkRouter)
-app.use('/', commentRouter)
+// app.use('/', userRouter)
+// app.use('/', postRouter)
+// app.use('/', rateRouter)
+// app.use('/', bookmarkRouter)
+// app.use('/', commentRouter)
+
+app.use('/', apiRouter)
 
 app.get("/", (req, res) => {
        res.json({
