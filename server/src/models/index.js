@@ -3,7 +3,7 @@ import dbConfig from '../configs/db.config.js';
 import UserModel from './user.model.js';
 import RoleModel from './role.model.js';
 import BookmarkModel from './bookmark.model.js';
-// import CommentModel from './comment.model.js';
+import CommentModel from './comment.model.js';
 import PostModel from './post.model.js';
 import RateModel from './rate.model.js';
 
@@ -28,7 +28,7 @@ connectDB.sequelize = sequelize;
 connectDB.users = UserModel(sequelize, Sequelize);
 connectDB.roles = RoleModel(sequelize, Sequelize);
 connectDB.posts = PostModel(sequelize, Sequelize);
-// connectDB.comments = CommentModel(sequelize, Sequelize);
+connectDB.comments = CommentModel(sequelize, Sequelize);
 connectDB.rates = RateModel(sequelize, Sequelize);
 connectDB.bookmarks = BookmarkModel(sequelize, Sequelize);
 
@@ -40,17 +40,17 @@ connectDB.roles.hasMany(connectDB.users, {foreinKey: 'roleId'} );
 connectDB.posts.belongsTo(connectDB.users);
 connectDB.users.hasMany(connectDB.posts, {foreinKey: 'userId'} );
 
-// //comments-users
-// connectDB.comments.belongsTo(connectDB.users);
-// connectDB.users.hasMany(connectDB.comments, {foreinKey: 'userId'} );
+//comments-users
+connectDB.comments.belongsTo(connectDB.users);
+connectDB.users.hasMany(connectDB.comments, {foreinKey: 'userId'} );
 
-// //comments-posts
-// connectDB.comments.belongsTo(connectDB.posts);
-// connectDB.posts.hasMany(connectDB.comments, {foreinKey: 'postId'} );
+//comments-posts
+connectDB.comments.belongsTo(connectDB.posts);
+connectDB.posts.hasMany(connectDB.comments, {foreinKey: 'postId'} );
 
-// //comments-comments
-// connectDB.comments.belongsTo(connectDB.comments, {as: 'parent', foreignKey: 'parentId'});
-// connectDB.comments.hasMany(connectDB.comments, {as: 'children', foreignKey: 'parentId'} );
+//comments-comments
+connectDB.comments.belongsTo(connectDB.comments, {as: 'parent', foreignKey: 'parentId'});
+connectDB.comments.hasMany(connectDB.comments, {as: 'children', foreignKey: 'parentId'} );
 
 //posts-rates
 connectDB.rates.belongsTo(connectDB.posts);
