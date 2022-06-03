@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import dbConfig from '../configs/db.config.js';
 import UserModel from './user.model.js';
 import RoleModel from './role.model.js';
-// import BookmarkModel from './bookmark.model.js';
+import BookmarkModel from './bookmark.model.js';
 // import CommentModel from './comment.model.js';
 import PostModel from './post.model.js';
 import RateModel from './rate.model.js';
@@ -30,7 +30,7 @@ connectDB.roles = RoleModel(sequelize, Sequelize);
 connectDB.posts = PostModel(sequelize, Sequelize);
 // connectDB.comments = CommentModel(sequelize, Sequelize);
 connectDB.rates = RateModel(sequelize, Sequelize);
-// connectDB.bookmarks = BookmarkModel(sequelize, Sequelize);
+connectDB.bookmarks = BookmarkModel(sequelize, Sequelize);
 
 //users-roles
 connectDB.users.belongsTo(connectDB.roles);
@@ -60,12 +60,12 @@ connectDB.posts.hasMany(connectDB.rates, {foreinKey: 'postId'} );
 connectDB.rates.belongsTo(connectDB.users);
 connectDB.users.hasMany(connectDB.rates, {foreinKey: 'userId'} );
 
-// //users-bookmarks
-// connectDB.bookmarks.belongsTo(connectDB.users);
-// connectDB.users.hasMany(connectDB.bookmarks, {foreinKey: 'userId'} );
+//users-bookmarks
+connectDB.bookmarks.belongsTo(connectDB.users);
+connectDB.users.hasMany(connectDB.bookmarks, {foreinKey: 'userId'} );
 
-// //posts-bookmarks
-// connectDB.bookmarks.belongsTo(connectDB.posts);
-// connectDB.posts.hasMany(connectDB.bookmarks, {foreinKey: 'postId'} );
+//posts-bookmarks
+connectDB.bookmarks.belongsTo(connectDB.posts);
+connectDB.posts.hasMany(connectDB.bookmarks, {foreinKey: 'postId'} );
 
 export default connectDB;
