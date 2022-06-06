@@ -16,6 +16,13 @@ AuthController.register = async (req, res) => {
         roleId: req.body.roleId,
         createAt: Date.now(),
     }
+
+    const { error } = registerValidator(userUpdate);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
+
     await AuthService.createUsers(user)
         .then(() => {
             RES.created(res, user, Message.create);

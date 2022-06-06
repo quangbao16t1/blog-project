@@ -1,7 +1,6 @@
 import connectDB from "../models/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import Auth from "../configs/auth.config.js";
 
 const UserModel = connectDB.users;
 
