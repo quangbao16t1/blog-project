@@ -15,13 +15,13 @@ const port = process.env.PORT || 3332;
 
 try {
     connectDB.sequelize.sync({ force: false })
-       .then(() => {
-           console.log('yes re-sync done!')
-       })
+    .then(() => {
+        console.log('yes re-sync done!')
+    })
 } catch (error) {
     console.log(error);
 }
-       
+
 app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,7 +33,7 @@ app.use('/', apiRouter)
 
 app.get("/", (req, res) => {
     res.json({
-       message: "Hell World"
+        message: "Hell World"
     });
 });
 

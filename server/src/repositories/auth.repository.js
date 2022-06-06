@@ -32,7 +32,8 @@ AuthRepo.register = async (user) => {
     const userCreate = new UserModel();
 
     Object.assign(userCreate, user);
-
+    userCreate.createAt = Date.now();
+    
     if (user.passwordHash) {
         userCreate.passwordHash = await bcrypt.hashSync(user.passwordHash, 8);
     }

@@ -33,7 +33,7 @@ UserRepository.updateUser = async (userId, user) => {
     }
 
     Object.assign(userUpdate, user);
-
+    userUpdate.updateAt = Date.now();
     await userUpdate.save();
 }
 
@@ -54,7 +54,7 @@ UserRepository.createUsers = async (user) => {
     const userCreate = new UserModel();
 
     Object.assign(userCreate, user);
-
+    userCreate.createAt = Date.now();
     if (user.passwordHash) {
         userCreate.passwordHash = await bcrypt.hashSync(user.passwordHash, 8);
     }

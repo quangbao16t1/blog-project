@@ -1,4 +1,5 @@
 import Message from "../commons/message.js";
+import { postValidate } from "../commons/validation.js";
 import PostService from "../services/post.service.js";
 
 
@@ -56,8 +57,14 @@ PostController.createPost = async (req, res) => {
         title: req.body.title,
         content: req.body.content,
         imageCover: req.body.imageCover,
-        createAt: Date.now(),
     }
+
+    const { error } = postValidate(post);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
+
     await PostService.createPost(post)
         .then(() => {
             res.status(201).json({
@@ -79,8 +86,13 @@ PostController.updatePost = async (req, res) => {
         title: req.body.title,
         content: req.body.content,
         imageCover: req.body.imageCover,
-        updateAt: Date.now(),
     }
+
+    const { error } = postValidate(postUpdate);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
 
     const id = req.params.id;
 

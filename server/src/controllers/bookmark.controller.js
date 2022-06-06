@@ -1,5 +1,6 @@
 import Message from '../commons/message.js';
 import RES from '../commons/status.js';
+import { bookmarkValidate } from '../commons/validation.js';
 import BookmarkRepo from '../repositories/bookmark.repository.js';
 
 const BookmarkController = {};
@@ -9,8 +10,13 @@ BookmarkController.createBookmark = async (req, res) => {
         userId: req.body.userId,
         postId: req.body.postId,
         note: req.body.note,
-        createAt: Date.now(),
     }
+
+    const { error } = bookmarkValidate(bookmark);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
     await BookmarkRepo.createBookmark(bookmark)
         .then(() => {
             RES.created(res, bookmark, Message.create);
@@ -57,10 +63,14 @@ BookmarkController.updateBookmark = async (req, res) => {
         userId: req.body.userId,
         postId: req.body.postId,
         note: req.body.note,
-        updateAt: Date.now(),
     }
 
     const id = req.params.id;
+    const { error } = bookmarkValidate(bookmarkUpdate);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
 
     await BookmarkRepo.updateBookmark(id, bookmarkUpdate)
         .then(() => {
