@@ -4,7 +4,7 @@ import UserModel from './user.model.js';
 import RoleModel from './role.model.js';
 // import BookmarkModel from './bookmark.model.js';
 // import CommentModel from './comment.model.js';
-// import PostModel from './post.model.js';
+import PostModel from './post.model.js';
 // import RateModel from './rate.model.js';
 
 
@@ -27,7 +27,7 @@ connectDB.sequelize = sequelize;
 
 connectDB.users = UserModel(sequelize, Sequelize);
 connectDB.roles = RoleModel(sequelize, Sequelize);
-// connectDB.posts = PostModel(sequelize, Sequelize);
+connectDB.posts = PostModel(sequelize, Sequelize);
 // connectDB.comments = CommentModel(sequelize, Sequelize);
 // connectDB.rates = RateModel(sequelize, Sequelize);
 // connectDB.bookmarks = BookmarkModel(sequelize, Sequelize);
@@ -36,9 +36,9 @@ connectDB.roles = RoleModel(sequelize, Sequelize);
 connectDB.users.belongsTo(connectDB.roles);
 connectDB.roles.hasMany(connectDB.users, {foreinKey: 'roleId'} );
 
-// //users-posts
-// connectDB.posts.belongsTo(connectDB.users);
-// connectDB.users.hasMany(connectDB.posts, {foreinKey: 'userId'} );
+//users-posts
+connectDB.posts.belongsTo(connectDB.users);
+connectDB.users.hasMany(connectDB.posts, {foreinKey: 'userId'} );
 
 // //comments-users
 // connectDB.comments.belongsTo(connectDB.users);
