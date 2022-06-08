@@ -1,5 +1,6 @@
 import Message from "../commons/message.js";
 import RES from "../commons/status.js";
+import {registerValidator} from "../commons/validation.js";
 import AuthService from "../services/auth.service.js";
 
 const AuthController = {};
@@ -13,17 +14,16 @@ AuthController.register = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         passwordHash: req.body.passwordHash,
         address: req.body.address,
-        roleId: req.body.roleId,
-        createAt: Date.now(),
+        roleId: req.body.roleId
     }
 
-    const { error } = registerValidator(userUpdate);
+    const { error } = registerValidator(user);
 
     if (error) return res.status(422).json({
         error: error.details[0].message
     });
 
-    await AuthService.createUsers(user)
+    await AuthService.register(user)
         .then(() => {
             RES.created(res, user, Message.create);
         })

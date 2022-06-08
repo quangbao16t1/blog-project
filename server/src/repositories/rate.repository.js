@@ -32,6 +32,7 @@ RateRepo.updateRate = async (id, rate) => {
     if (!rateUpdate) throw "Rate not found!!!";
 
     Object.assign(rateUpdate, rate);
+    rateUpdate.updateAt = Date.now();
 
     await rateUpdate.save();
 }
@@ -47,7 +48,8 @@ RateRepo.deleteRate = async (id) => {
 RateRepo.createRate = async (rate) => {
 
     const rateCreate = new RateModel(rate);
-
+    rateCreate.createAt = Date.now();
+    
     await rateCreate.save();
 }
 

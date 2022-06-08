@@ -1,5 +1,6 @@
 import Message from "../commons/message.js";
 import RES from "../commons/status.js";
+import { registerValidator, updateUserValidate } from "../commons/validation.js";
 import UserService from "../services/user.service.js";
 
 const UserController = {};
@@ -43,8 +44,14 @@ UserController.createUser = async (req, res) => {
         passwordHash: req.body.passwordHash,
         address: req.body.address,
         roleId: req.body.roleId,
-        createAt: Date.now(),
     }
+
+    const { error } = registerValidator(user);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
+
     await UserService.createUsers(user)
         .then(() => {
             RES.created(res, user, Message.create);
@@ -63,8 +70,13 @@ UserController.updateUser = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         address: req.body.address,
         roleId: req.body.roleId,
-        updateAt: Date.now(),
     }
+
+    const { error } = updateUserValidate(user);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
 
     const id = req.params.id;
 

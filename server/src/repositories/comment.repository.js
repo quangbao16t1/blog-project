@@ -33,6 +33,8 @@ CommentRepo.updateCommnet = async (id, cmt) => {
 
     Object.assign(commentUpdate, cmt);
 
+    commentUpdate.updateAt = Date.now();
+
     await commentUpdate.save();
 }
 
@@ -47,6 +49,7 @@ CommentRepo.deleteComment = async (id) => {
 CommentRepo.createComment = async (cmt) => {
 
     const commentCreate = new CommentModel(cmt);
+    commentCreate.createAt = Date.now();
 
     await commentCreate.save();
 }

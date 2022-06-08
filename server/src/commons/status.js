@@ -61,7 +61,7 @@ RES.unAuth = (res, error, message) => {
 RES.internal = (res, error, message) => {
     return res.status(500).json({
         message: message,
-        error: error.message
+        error: error
     })
 }
 

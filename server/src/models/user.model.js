@@ -45,9 +45,11 @@ const Users = (sequelize, Sequelize) => {
         },
         createAt: {
             type: DataTypes.DATE,
+            default: Date.now()
         },
         updateAt: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            allowNull: true
         }
     },{
         timestamps: false

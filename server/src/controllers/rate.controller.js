@@ -1,5 +1,6 @@
 import Message from '../commons/message.js';
 import RES from '../commons/status.js';
+import { rateUpdateValidate, rateValidate } from '../commons/validation.js';
 import RateService from '../services/rate.service.js';
 
 const RateController = {};
@@ -9,8 +10,14 @@ RateController.createRate = async (req, res) => {
         userId: req.body.userId,
         postId: req.body.postId,
         rate: req.body.rate,
-        createAt: Date.now(),
     }
+
+    const { error } = rateValidate(rate);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
+
     await RateService.createRate(rate)
         .then(() => {
             RES.created(res, rate, Message.create);
@@ -54,10 +61,14 @@ RateController.updateRate = async (req, res) => {
         userId: req.body.userId,
         postId: req.body.postId,
         rate: req.body.rate,
-        updateAt: Date.now(),
     }
 
     const id = req.params.id;
+    const { error } = rateUpdateValidate(rateUpdate);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
 
     await RateService.updateRate(id, rateUpdate)
         .then(() => {

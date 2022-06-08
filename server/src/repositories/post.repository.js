@@ -31,6 +31,7 @@ PostService.updatePost = async (id, post) => {
     if (!postUpdate) throw "Post not found!!!";
 
     Object.assign(postUpdate, post);
+    postUpdate.updateAt = Date.now();
 
     await postUpdate.save();
 }
@@ -46,6 +47,8 @@ PostService.deletePost = async (id) => {
 PostService.createPost = async (post) => {
     
     const postCreate = new PostModel(post);
+
+    postCreate.createAt = Date.now();
 
     await postCreate.save();
 }

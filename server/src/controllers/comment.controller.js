@@ -1,6 +1,7 @@
 import Message from '../commons/message.js';
 import RES from '../commons/status.js';
 import CommentService from '../services/comment.service.js';
+import { cmtUpdateValidate, cmtValidate } from '../commons/validation.js';
 
 const CommentController = {};
 
@@ -11,8 +12,14 @@ CommentController.createComment = async (req, res) => {
         parentId: req.body.parentId,
         comment: req.body.comment,
         publish: req.body.publish,
-        createAt: Date.now(),
     }
+
+    const { error } = cmtValidate(cmt);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
+
     await CommentService.createComment(cmt)
         .then(() => {
             RES.created(res, cmt, Message.create);
@@ -59,8 +66,13 @@ CommentController.updateComment = async (req, res) => {
         // parentId: req.body.parentId,
         comment: req.body.comment,
         publish: req.body.publish,
-        updateAt: Date.now(),
     }
+
+    const { error } = cmtUpdateValidate(cmtUpdate);
+
+    if (error) return res.status(422).json({
+        error: error.details[0].message
+    });
 
     const id = req.params.id;
 
