@@ -12,12 +12,14 @@ const authApi = {
             .then((response) => {
                 if (response.data.result.token) {
                   localStorage.setItem(StorageKeys.user, JSON.stringify(response.data.result.user));
+                  localStorage.setItem(StorageKeys.access, JSON.stringify(response.data.result.token));
                 }
                 return response.data.result;
               });;
     },
     logout() {
         localStorage.removeItem(StorageKeys.user);
+        localStorage.removeItem(StorageKeys.access);
         localStorage.clear();
     },
 }

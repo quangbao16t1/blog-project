@@ -1,3 +1,4 @@
+import StorageKeys from "constants/storage-keys"
 
 export interface AuthState {
     isAuth: boolean
@@ -8,7 +9,7 @@ export interface AuthState {
 
 export interface CurrentUser {
     id: number
-    fisrtName: string
+    firstName: string
     lastName: string
     email: string
     gender: string
@@ -21,4 +22,5 @@ export const initialState: AuthState = {
     isAuth: false,
     isLoading: false,
     error: "",
+    currentUser: JSON.parse(localStorage.getItem(StorageKeys.user) ?? "")
 }

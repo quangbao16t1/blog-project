@@ -1,4 +1,4 @@
-import { Button, Layout, Menu, Space } from 'antd';
+import { Button, Layout, Menu, MenuProps, Space } from 'antd';
 import 'antd/dist/antd.css';
 import './Header.css';
 import {
@@ -10,40 +10,24 @@ import {
 } from '@ant-design/icons';
 import girlImg from './girl.jpg';
 import logo from './logo.png';
-import { useEffect, useState } from 'react';
-import StorageKeys from 'constants/storage-keys';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props: any) => {
     const navigate = useNavigate();
     const { Header } = Layout;
-    const [user, setUser] = useState();
 
+    console.log("HoangNgao: ", props.currentUser);
 
-    const logout =async () => {
-        await localStorage.clear();
-        navigate('/login');
-    }
-
-    useEffect(() => {
-        const userString = localStorage.getItem(StorageKeys.user);
-        if (userString) {
-            const userss = (JSON.parse(userString));
-            setUser(userss);
-        }
-    }, [StorageKeys.user]);
-
-    console.log(user);
-
-    const items = [
+    const items: MenuProps['items'] = [
         {
             label: 'Trang Chủ',
-            key: 'mail',
+            key: 'home',
             icon: <HomeOutlined />,
         },
         {
             label: 'Bài viết',
-            key: 'mail',
+            key: 'post',
             icon: <MailOutlined />,
         },
         {
@@ -82,12 +66,16 @@ const Header = () => {
             ],
         }
     ];
-    // const [current, setCurrent] = useState('mail');
+    const [current, setCurrent] = useState('');
 
-    // const onClick = (e) => {
-    //   console.log('click ', e);
-    //   setCurrent(e.key);
-    // };
+    const onClick: MenuProps['onClick'] = e => {
+        console.log('click ', e);
+        setCurrent(e.key);
+        if (current === 'home') {
+            navigate('/home');
+        };
+    }
+
     return (
         <>
             <Layout className="layout">
@@ -102,24 +90,28 @@ const Header = () => {
                             theme="dark"
                             mode="horizontal"
                             items={items}
-                        // style={{color: "white"}}
+                            onClick={onClick}
+                            selectedKeys={[current]}
                         />
                     </div>
-                    {!user ? <div className='btn-header'>
+                    {!props.currentUser?.firstName ? <div className='btn-header'>
                         <Space className='btn-header'>
                             <Button type="primary" onClick={() => navigate('/register')}>Sign up</Button>
                             <Button type='primary' onClick={() => navigate('/login')}>Sign in</Button>
                         </Space>
                     </div>
                         : <div className='account'>
-                            <p>Hi, {user['firstName']} </p>
+                            <p>Hi, {props.currentUser?.firstName} </p>
                             <div className="avatar">
                                 <div className="avatar-img">
                                     <img src={girlImg} />
                                     <Button
                                         type='primary'
                                         className='logout'
-                                        onClick={logout}
+                                        onClick={() => {
+                                            props.logout();
+                                            navigate('/login')
+                                        }}
                                     >
                                         <i> <LogoutOutlined /> </i>
                                         Logout

@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import {authSlice} from 'features/Auth/authSlice';
+import {authReducer} from 'features/Auth/authSlice';
+import logger from 'redux-logger';
 
 
 export const store = configureStore({
   reducer: {
-    auth: authSlice.reducer
+    auth: authReducer
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

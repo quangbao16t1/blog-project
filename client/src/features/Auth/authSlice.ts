@@ -24,17 +24,18 @@ export const login = createAsyncThunk(
         try {
             const result = await authApi.login(data);
             return { result: result.user };
-            
+
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
 );
+
 export const logout = createAsyncThunk("auth/logout", async () => {
     await authApi.logout();
 });
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {},
@@ -44,9 +45,13 @@ export const authSlice = createSlice({
                 state.isAuth = false
             })
             .addCase(login.fulfilled, (state, action) => {
-                state.currentUser = action.payload.result;
-                state.isAuth = true
-                state.isLoading = false
+                // const {currenUser, isLoading, isAuth} = action.payload;
+                Object.assign(state, {
+                    currentUser: action.payload.result,
+                    sisAuth: true,
+                    isLoading: false
+                }
+                )
             })
             .addCase(login.rejected, (state, action) => {
                 state.error = "Cant login"
@@ -60,10 +65,11 @@ export const authSlice = createSlice({
             })
             .addCase(logout.fulfilled, (state, action) => {
                 state.isLoading = false
+                state.currentUser = undefined;
             })
     },
 });
 
 export const authSelector = (state: RootState) => state.auth
 
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;
