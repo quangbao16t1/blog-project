@@ -23,7 +23,7 @@ export const updateUserValidate = (data) => {
         gender: Joi.string().min(3).max(15).required(),
         address: Joi.string().min(3).max(225).required(),
         phoneNumber: Joi.string().pattern(new RegExp('^[0-9]{6,12}$')).required(),
-        roleId: Joi.required()
+        roleId: Joi.number().required()
     })
 
     return rule.validate(data);
@@ -54,37 +54,37 @@ export const cmtValidate = (cmt) => {
 
 export const cmtUpdateValidate = (cmt) => {
     const rule = Joi.object({
-        comment: Joi.string().required(),
+        comment: Joi.string().max(255).required(),
         publish: Joi.string().allow(null),
     })
 
     return rule.validate(cmt)
 }
 
-export const rateValidate = (cmt) => {
+export const rateValidate = (rate) => {
     const rule = Joi.object({
         userId: Joi.number().required(),
         postId: Joi.number().required(),
         rate: Joi.number().min(0).max(5).required()
     })
 
-    return rule.validate(cmt)
+    return rule.validate(rate)
 }
 
-export const rateUpdateValidate = (cmt) => {
+export const rateUpdateValidate = (rate) => {
     const rule = Joi.object({
         rate: Joi.number().min(0).max(5).required()
     })
 
-    return rule.validate(cmt)
+    return rule.validate(rate)
 }
 
-export const bookmarkValidate = (cmt) => {
+export const bookmarkValidate = (bookmark) => {
     const rule = Joi.object({
         userId: Joi.number().required(),
         postId: Joi.number().required(),
         note: Joi.string().required()
     })
 
-    return rule.validate(cmt)
+    return rule.validate(bookmark)
 }

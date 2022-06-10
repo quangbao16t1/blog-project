@@ -18,7 +18,7 @@ AuthRepo.login = async (email, password) => {
     if (user && bcrypt.compareSync(password, user.passwordHash)) {
         const token = jwt.sign({ sub: user.id }, process.env.TOKEN_SECRET, { expiresIn: '7d' });
         return {
-            ...user.toJSON(),
+            user,
             token
         };
     }

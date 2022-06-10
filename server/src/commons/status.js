@@ -15,9 +15,10 @@ RES.created = (res, result, message) => {
     })
 }
 
-RES.updated = (res, message) => {
-    return res.status(201).json({
+RES.updated = (res, result, message) => {
+    return res.status(200).json({
         success: true,
+        result: result,
         message: message,
     })
 }
