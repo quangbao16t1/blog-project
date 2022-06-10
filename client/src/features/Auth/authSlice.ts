@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import authApi from "api/auth";
 import { AuthState, CurrentUser, initialState } from 'types/auth.type'
@@ -5,27 +6,31 @@ import { AppThunk, RootState } from '../../app/store';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+
 export const register = createAsyncThunk(
     "auth/register",
     async (data: any, thunkAPI) => {
         try {
             const response = await authApi.register(data);
-            //   thunkAPI.dispatch(setMessage(response.data.message));
-            return { user: response.data.result };
+            toast("Register successfully!!!");
+            return { result: response.data };
         } catch (error) {
-            //   thunkAPI.dispatch(setMessage(message));
+            toast("cant register")
             return thunkAPI.rejectWithValue(error);
         }
     }
 );
+
 export const login = createAsyncThunk(
     "auth/login",
     async (data: any, thunkAPI) => {
         try {
             const result = await authApi.login(data);
+            toast('Login successfully!!!')
             return { result: result.user };
-
         } catch (error) {
+            toast.warning('Email or Password not correct!!!')
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -33,6 +38,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async () => {
     await authApi.logout();
+    toast('Logout successfully!!!')
 });
 
 const authSlice = createSlice({
@@ -48,7 +54,7 @@ const authSlice = createSlice({
                 // const {currenUser, isLoading, isAuth} = action.payload;
                 Object.assign(state, {
                     currentUser: action.payload.result,
-                    sisAuth: true,
+                    isAuth: true,
                     isLoading: false
                 }
                 )
@@ -58,7 +64,7 @@ const authSlice = createSlice({
                 state.isAuth = false
             })
             .addCase(register.fulfilled, (state, action) => {
-                state.currentUser = action.payload.user
+                state.isLoading = false
             })
             .addCase(register.rejected, (state, action) => {
                 state.error = "Email does not exits!!"

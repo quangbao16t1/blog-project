@@ -10,6 +10,7 @@ import { authSelector, logout } from 'features/Auth/authSlice';
 import StorageKeys from 'constants/storage-keys';
 import Home from 'features/HomPage/Home';
 import { CurrentUser } from 'types/auth.type';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -20,13 +21,6 @@ function App() {
   console.log(currentUser);
 
   const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   const userString = localStorage.getItem(StorageKeys.user);
-  //   if (userString) {
-  //     const userss = (JSON.parse(userString));
-  //     setUser(userss);
-  //   }
-  // }, [StorageKeys.user]);
 
   const logoutt = () => {
     dispatch(logout())
@@ -35,6 +29,7 @@ function App() {
   return (
     <div>
       <BrowserRouter >
+        <ToastContainer style={{marginTop: '100px'}} />
         <Header currentUser={currentUser} logout={() => logoutt()} />
         <Routes>
           <Route path="/register" element={<Register />} />

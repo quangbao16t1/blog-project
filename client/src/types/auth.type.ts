@@ -22,5 +22,5 @@ export const initialState: AuthState = {
     isAuth: false,
     isLoading: false,
     error: "",
-    currentUser: JSON.parse(localStorage.getItem(StorageKeys.user) ?? "")
+    currentUser: JSON.parse(localStorage.getItem(StorageKeys.user) ?? "{}")
 }

@@ -7,13 +7,9 @@ import {
 } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import './Login.css'
-import { useAppSelector, useAppDispatch } from 'app/hook';
+import { useAppDispatch, useAppSelector } from 'app/hook';
 import { authSelector, login } from './authSlice';
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import StorageKeys from 'constants/storage-keys'
-import { toast } from "react-toastify";
-
 
 const Login = () => {
 
@@ -23,10 +19,14 @@ const Login = () => {
 
     const sunmitt = async (values: any) => {
         await dispatch(login(values))
-        .then( () =>  {
-            navigate('/home')
-            toast.success('Login successfully!!!')
-        });
+            .then((result) => {
+                if (result.meta.requestStatus === "fulfilled") {
+                    navigate('/home')
+                }
+                else if (result.meta.requestStatus === 'rejected') {
+                    navigate('/login')
+                }
+            });
     };
 
     return (
@@ -93,6 +93,7 @@ const Login = () => {
                     <GoogleOutlined className="icon-login" />
                 </div>
             </div>
+
         </body>
     );
 }
