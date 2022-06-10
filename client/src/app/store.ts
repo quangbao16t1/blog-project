@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import {authReducer} from 'features/Auth/authSlice';
+import { profileReducer } from 'features/Profile/profileSlice';
 import logger from 'redux-logger';
 
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer
+    auth: authReducer,
+    profile: profileReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })

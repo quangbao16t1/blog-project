@@ -12,12 +12,15 @@ import girlImg from './girl.jpg';
 import logo from './logo.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from 'app/hook';
+import { getProfile } from 'features/Profile/profileSlice';
 
 const Header = (props: any) => {
     const navigate = useNavigate();
     const { Header } = Layout;
 
-    console.log("HoangNgao: ", props.currentUser);
+    // console.log("HoangNgao: ", props.currentUser);
+    const dispatch = useAppDispatch();
 
     const items: MenuProps['items'] = [
         {
@@ -105,17 +108,28 @@ const Header = (props: any) => {
                             <div className="avatar">
                                 <div className="avatar-img">
                                     <img src={girlImg} />
-                                    <Button
-                                        type='primary'
-                                        className='logout'
-                                        onClick={() => {
-                                            props.logout();
-                                            navigate('/login')
-                                        }}
-                                    >
-                                        <i> <LogoutOutlined /> </i>
-                                        Logout
-                                    </Button>
+                                    <Space className='logout'>
+                                        <Button
+                                            type='primary'
+                                            onClick={() => {
+                                                dispatch(getProfile(props.currentUser?.id))
+                                                navigate('/profile')
+                                            }}
+                                        >
+                                            <i> <LogoutOutlined /> </i>
+                                            Profile
+                                        </Button>
+                                        <Button
+                                            type='primary'
+                                            onClick={() => {
+                                                props.logout();
+                                                navigate('/login')
+                                            }}
+                                        >
+                                            <i> <LogoutOutlined /> </i>
+                                            Logout
+                                        </Button>
+                                    </Space>
                                 </div>
                             </div>
                         </div>}

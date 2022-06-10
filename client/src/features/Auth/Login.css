@@ -60,10 +60,10 @@ body {
     border-radius: 10px;
 }
 
-a {
+.login-container a {
     color: white;
 }
-a:hover {
+.login-container a:hover {
     color: black;
     font-size: 16px;
     font-weight: 400;

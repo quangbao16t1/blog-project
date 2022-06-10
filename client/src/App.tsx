@@ -10,6 +10,7 @@ import { authSelector, logout } from 'features/Auth/authSlice';
 import StorageKeys from 'constants/storage-keys';
 import Home from 'features/HomPage/Home';
 import { CurrentUser } from 'types/auth.type';
+import ProfilePage from 'features/Profile/ProfilePage';
 
 function App() {
 
@@ -40,7 +41,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path='/home' element={<Home />} />
-
+          <Route path='/profile' element={<ProfilePage />}/>
         </Routes>
         <Footer />
       </BrowserRouter>

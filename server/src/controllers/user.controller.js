@@ -72,7 +72,7 @@ UserController.updateUser = async (req, res) => {
         roleId: req.body.roleId,
     }
 
-    const { error } = updateUserValidate(user);
+    const { error } = updateUserValidate(userUpdate);
 
     if (error) return res.status(422).json({
         error: error.details[0].message

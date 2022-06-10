@@ -14,13 +14,13 @@ export interface CurrentUser {
     email: string
     gender: string
     address: string
-    phoneNumber: string
+    phoneNumber: string 
     roleId: number
 }
 
 export const initialState: AuthState = {
     isAuth: false,
+    currentUser: JSON.parse(localStorage.getItem(StorageKeys.user) ?? '{}'),
     isLoading: false,
     error: "",
-    currentUser: JSON.parse(localStorage.getItem(StorageKeys.user) ?? "")
 }
