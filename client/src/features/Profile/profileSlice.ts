@@ -24,8 +24,8 @@ export const editProfile = createAsyncThunk(
   "profile/editProfile",
   async (data: any, thunkAPI) => {
     try {
-      const result = await profileApi.editProfile(JSON.parse(localStorage.getItem(StorageKeys.user) ?? '{}').id, data);
-      return { result: result };
+      const response = await profileApi.editProfile(JSON.parse(localStorage.getItem(StorageKeys.user) ?? '{}').id, data);
+      return { result: response?.data.result};
 
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -37,6 +37,7 @@ const initialState: ProfileState = {
   user: JSON.parse(localStorage.getItem(StorageKeys.user) ?? '{}'),
   isLoading: false,
   error: "",
+  message: ""
 }
 
 const profileSlice = createSlice({
@@ -59,7 +60,8 @@ const profileSlice = createSlice({
         state.isLoading = true
       })
       .addCase(editProfile.fulfilled, (state, action) => {
-        state.error = `${action.payload.result}`
+        state.user = action.payload.result;
+        state.message = 'edit success!'
       })
       .addCase(editProfile.rejected, (state, action) => {
         state.error = 'not found!!!'

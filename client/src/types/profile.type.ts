@@ -12,4 +12,5 @@ export interface ProfileState {
   user?: CurrentUser
   isLoading: boolean
   error: string
+  message: string
 }

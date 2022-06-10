@@ -23,7 +23,7 @@ export const updateUserValidate = (data) => {
         gender: Joi.string().min(3).max(15).required(),
         address: Joi.string().min(3).max(225).required(),
         phoneNumber: Joi.string().pattern(new RegExp('^[0-9]{6,12}$')).required(),
-        roleId: Joi.required()
+        roleId: Joi.number().required()
     })
 
     return rule.validate(data);

@@ -108,8 +108,9 @@ const Header = (props: any) => {
                             <div className="avatar">
                                 <div className="avatar-img">
                                     <img src={girlImg} />
-                                    <Space className='logout'>
+                                    <div className='logout'>
                                         <Button
+
                                             type='primary'
                                             onClick={() => {
                                                 dispatch(getProfile(props.currentUser?.id))
@@ -120,6 +121,7 @@ const Header = (props: any) => {
                                             Profile
                                         </Button>
                                         <Button
+                                            className='btn-logout'
                                             type='primary'
                                             onClick={() => {
                                                 props.logout();
@@ -129,7 +131,7 @@ const Header = (props: any) => {
                                             <i> <LogoutOutlined /> </i>
                                             Logout
                                         </Button>
-                                    </Space>
+                                    </div>
                                 </div>
                             </div>
                         </div>}

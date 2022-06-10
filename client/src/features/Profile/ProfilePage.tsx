@@ -58,9 +58,9 @@ const ProfilePage = () => {
             gender: user?.gender,
             address: user?.address,
             phoneNumber: user?.phoneNumber,
-            role: user?.roleId === 3 ? "User" :user?.roleId===2 ? 'Admin': 'Root Admin'
+            roleId: user?.roleId 
         });
-    }, [])
+    }, [user])
 
     const handleCancel = () => {
         setModal2Visible(false)
@@ -224,7 +224,7 @@ const ProfilePage = () => {
                             <Row gutter={8}>
                                 <Col span={16}>
                                     <FormItem
-                                        name="role"
+                                        name="roleId"
                                         rules={[
                                             {
                                                 required: true,
@@ -233,9 +233,9 @@ const ProfilePage = () => {
                                         ]}
                                     >
                                         <Select disabled className="select-filed" placeholder="select your gender">
-                                            <Option value="3">User</Option>
-                                            <Option value="1">Root Admin</Option>
-                                            <Option value="2">Admin</Option>
+                                            <Option value={3}>User</Option>
+                                            <Option value={1}>Root Admin</Option>
+                                            <Option value={2}>Admin</Option>
                                         </Select>
                                     </FormItem>
                                 </Col>
