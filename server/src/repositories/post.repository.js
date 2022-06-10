@@ -1,4 +1,5 @@
 import connectDB from "../models/index.js";
+import RateRepo from "./rate.repository.js";
 
 
 const PostModel = connectDB.posts;
@@ -7,12 +8,21 @@ const Op = connectDB.Sequelize.Op;
 const PostService = {};
 
 PostService.getAllPosts = async () => {
-    return await PostModel.findAll({
+    const listPost =  await PostModel.findAll({
         include: [{
             model: connectDB.users,
             // attributes: ['firstName', 'lastName']
         }]
     });
+
+    const postPromile = await listPost.map(async (post) => {
+        const totalRate = await RateRepo.getRateByPostId(post.id);
+        post.dataValues.totalRate = totalRate;
+        return post;
+    })
+    const newListPost = await Promise.all(postPromile);
+
+    return newListPost;
 }
 
 PostService.getPostById = async (id) => {
