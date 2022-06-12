@@ -4,6 +4,7 @@ import './Header.css';
 import {
     MailOutlined,
     SnippetsOutlined,
+    UserOutlined,
     WechatOutlined,
     HomeOutlined,
     LogoutOutlined
@@ -117,7 +118,7 @@ const Header = (props: any) => {
                                                 navigate('/profile')
                                             }}
                                         >
-                                            <i> <LogoutOutlined /> </i>
+                                            <i> <UserOutlined /> </i>
                                             Profile
                                         </Button>
                                         <Button
