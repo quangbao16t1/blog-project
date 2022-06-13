@@ -7,6 +7,7 @@ import {
     DislikeFilled,
     LikeFilled
 } from '@ant-design/icons';
+import './Comment.css';
 
 
 const { TextArea } = Input;
@@ -76,7 +77,7 @@ const CommentView = () => {
             <Form.Item>
                 <TextArea rows={4} onChange={onChange} value={value} />
             </Form.Item>
-            <Form.Item>
+            <Form.Item >
                 <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
                     Add Comment
                 </Button>
@@ -98,14 +99,14 @@ const CommentView = () => {
                 {
                     author: 'Han Solo',
                     avatar: 'https://joeschmoe.io/api/v1/random',
-                    content: <p style={{color:"black"}}>{value}</p>,
+                    content: <p style={{ color: "black" }}>{value}</p>,
                     datetime: moment().fromNow(),
                 },
             ]);
         }, 1000);
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (e: any) => {
         setValue(e.target.value);
     };
 
@@ -113,7 +114,7 @@ const CommentView = () => {
         <>
             {comments.length > 0 && <CommentList comments={comments} />}
             <Comment
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+                avatar={<Avatar src ='https://joeschmoe.io/api/v1/random' alt="Han Solo" />}
                 content={
                     <Editor
                         onChange={handleChange}

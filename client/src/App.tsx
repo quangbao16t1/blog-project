@@ -11,6 +11,8 @@ import StorageKeys from 'constants/storage-keys';
 import Home from 'features/HomPage/Home';
 import { CurrentUser } from 'types/auth.type';
 import ProfilePage from 'features/Profile/ProfilePage';
+import AdminRoutes  from 'routes/AdminRoutes';
+import CommentView from 'features/Comment/Comment';
 
 function App() {
 
@@ -44,6 +46,8 @@ function App() {
           <Route path='/profile' element={<ProfilePage />}/>
         </Routes>
         <Footer />
+        {/* <AdminRoutes /> */}
+        {/* <CommentView /> */}
       </BrowserRouter>
     </div>
   );

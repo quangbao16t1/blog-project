@@ -15,5 +15,5 @@ export const AuthAdminRoute = ({children}: Props) => {
         if (currentUser.roleId !== 1) return <>{children}</>
         else return <Navigate to="/" state={{ from: location }} replace />;
     }
-    else return <Navigate to="/login-and-register" state={{ from: location }} replace />;
+    else return <Navigate to="/login" state={{ from: location }} replace />;
 };
