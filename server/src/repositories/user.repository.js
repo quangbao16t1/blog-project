@@ -35,6 +35,7 @@ UserRepository.updateUser = async (userId, user) => {
     Object.assign(userUpdate, user);
     userUpdate.updateAt = Date.now();
     await userUpdate.save();
+    return userUpdate;
 }
 
 UserRepository.deleteUser = async (userId) => {

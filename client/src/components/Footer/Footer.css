@@ -16,6 +16,7 @@
 .footer-top h3,
 h1 {
     font-weight: bold;
+    font-size: 20px;
     color: white;
 }
 
@@ -23,11 +24,10 @@ h1 {
     list-style: none;
 }
 
-.footer-top a {
+.ul-footer {
     text-decoration: none;
     color: white;
 }
-
 
 .footer-line {
     font-weight: bold;
@@ -51,6 +51,7 @@ h1 {
 .footer-text p {
     inline-size: 500px;
     overflow-wrap: break-word;
+    color: white;
 }
 
 .footer-icon {
@@ -58,6 +59,7 @@ h1 {
     flex-direction: row;
     padding: 10px;
     justify-content: start;
+    color: white;
 }
 
 .footer-icon i {
@@ -83,7 +85,6 @@ h1 {
     color: white;
     text-align: center;
 }
-
-* p {
-    color: white;
+.footer-title {
+    font-size: 25px;
 }

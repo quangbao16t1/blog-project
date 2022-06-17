@@ -38,7 +38,7 @@ AuthController.login = async (req, res) => {
     const email = req.body.email;
     const passwordHash = req.body.passwordHash;
     await AuthService.login(email, passwordHash)
-        .then(user => user ? res.json({ User: user }) : res.status(400).json({ message: Message.loginValid }))
+        .then(user => user ? res.json({ result: user }) : res.status(400).json({ message: Message.loginValid }))
         .catch(error => {
             console.log(error);
         })

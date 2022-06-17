@@ -66,23 +66,21 @@ UserController.updateUser = async (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         gender: req.body.gender,
-        email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         address: req.body.address,
         roleId: req.body.roleId,
     }
 
-    const { error } = updateUserValidate(user);
-
+    const { error } = updateUserValidate(userUpdate);
     if (error) return res.status(422).json({
-        error: error.details[0].message
+        error: error.message
     });
 
     const id = req.params.id;
 
     await UserService.updateUser(id, userUpdate)
-        .then(() => {
-            RES.updated(res, Message.unCreate);
+        .then((user) => {
+            RES.updated(res, user ,Message.update);
         })
         .catch((error) => {
             RES.internal(res, error, Message.unUpdate);

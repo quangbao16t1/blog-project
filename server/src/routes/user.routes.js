@@ -1,12 +1,12 @@
 import express from 'express';
 import UserController from '../controllers/user.controller.js';
-import verifyToken from '../middlewares/verifyToken.js';
+import {verifyToken} from '../middlewares/verifyToken.js';
 
 const userRouter = express.Router();
 
 userRouter.get('/users', verifyToken, UserController.getAllUsers);
 
-userRouter.get('/users/:id', verifyToken, UserController.getUserById);
+userRouter.get('/users/:id',  UserController.getUserById);
 
 userRouter.post('/users/new', UserController.createUser);
 
