@@ -1,0 +1,28 @@
+.about-author img {
+  border-radius: 50%;
+}
+
+.about-author .desc h3 {
+  font-size: 20px;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.p-4 {
+  padding: 1.5rem !important;
+}
+
+.mr-5 {
+  margin-right: 3rem !important;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}

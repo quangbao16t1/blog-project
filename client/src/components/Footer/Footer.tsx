@@ -24,13 +24,13 @@ const Footer = () => {
                                 <h3>Trợ giúp</h3>
                             </li>
                             <li>
-                                <a>Trung tâm trợ giúp</a>
+                                <a className='ul-footer'>Trung tâm trợ giúp</a>
                             </li>
                             <li>
-                                <a> Diễn đàn trợ giúp</a>
+                                <a className='ul-footer'> Diễn đàn trợ giúp</a>
                             </li>
                             <li>
-                                <a> Bài hướng dẫn bằng video</a>
+                                <a className='ul-footer'> Bài hướng dẫn bằng video</a>
                             </li>
                         </ul>
                         <ul>
@@ -38,18 +38,18 @@ const Footer = () => {
                                 <h3>Cộng đồng</h3>
                             </li>
                             <li>
-                                <a>Blogger Buzzp</a>
+                                <a className='ul-footer'>Blogger Buzzp</a>
                             </li>
                         </ul>
                         <ul>
                             <li>
-                                <h3>Nhà phát triển</h3>
+                                <h3 className='ul-footer'>Nhà phát triển</h3>
                             </li>
                             <li>
-                                <a>API Blogger</a>
+                                <a className='ul-footer'>API Blogger</a>
                             </li>
                             <li>
-                                <a>Diễn đàn nhà phát triển</a>
+                                <a className='ul-footer'>Diễn đàn nhà phát triển</a>
                             </li>
                         </ul>
                     </section>
@@ -85,7 +85,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="footer-copy"> 
-                       <p> Designed by <a href='https://www.webico.vn/>WEBICO.VN' /></p>
+                       <p> Copyright ©2022 All rights reserved | This template is made with  by Colorlib <a href='https://www.webico.vn/>WEBICO.VN' /></p>
                     </div>
                 </Footer>
             </Layout>

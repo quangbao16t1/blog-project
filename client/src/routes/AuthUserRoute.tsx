@@ -17,5 +17,5 @@ export const AuthUserRoute = ({ children}: Props) => {
         if (currentUser.roleId === 3) return <>{children}</>
         else return <Navigate to="/" state={{ from: location }} replace />;
     }
-    else return <Navigate to="/login-and-register" state={{ from: location }} replace />;
+    else return <Navigate to="/login" state={{ from: location }} replace />;
 };

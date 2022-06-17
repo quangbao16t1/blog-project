@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import {authReducer} from 'features/Auth/authSlice';
 import { commentReducer } from 'features/Comment/CommentSlice';
+import { postReducer } from 'features/Post/postSlice';
 import { profileReducer } from 'features/Profile/profileSlice';
 import logger from 'redux-logger';
 
@@ -9,7 +10,8 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     profile: profileReducer,
-    comment: commentReducer
+    comment: commentReducer,
+    post: postReducer
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

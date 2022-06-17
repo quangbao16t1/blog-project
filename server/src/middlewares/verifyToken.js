@@ -32,7 +32,6 @@ export const isAdmin = async (req, res, next) => {
                 res.status(500).send({ message: err });
                 return;
             }
-
             RoleModel.findAll({ where: { id: user.roleId } },
                 (err, roles) => {
                     if (err) {

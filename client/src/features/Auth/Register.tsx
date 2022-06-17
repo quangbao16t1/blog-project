@@ -22,7 +22,7 @@ const Register = () => {
     const formItemLayout = {
         labelCol: {
             xs: {
-                span: 24,
+                span: 4,
             },
             sm: {
                 span: 8,
@@ -30,7 +30,7 @@ const Register = () => {
         },
         wrapperCol: {
             xs: {
-                span: 24,
+                span: 20,
             },
             sm: {
                 span: 16,
@@ -53,48 +53,42 @@ const Register = () => {
     const [form] = Form.useForm();
 
     return (
-        <body>
-            <div className="container">
-                <h1>Register</h1>
+        <div className="container-register">
+            <div className="register-container">
+                <h1 className="title-register">Register</h1>
                 <Form
                     name="formLogin"
                     form={form}
                     {...formItemLayout}
-                    className="login-form"
+                    className="register-form"
                     scrollToFirstError
                     onFinish={handelSubmit}
                 >
-                    <Form.Item label="First Name" required={true} className="form-item-name"  >
-                        <Row gutter={8}>
-                            <Col span={9}>
-                                <Form.Item
-                                    name="firstName"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input your fist name!',
-                                        },
-                                    ]}
-                                >
-                                    <Input className="input-name" />
-                                </Form.Item>
-                            </Col>
-                            <Col span={15}>
-                                <Form.Item
-                                    className="form-item-name"
-                                    name="lastName"
-                                    label="Last Name"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input your last name!',
-                                        },
-                                    ]}
-                                >
-                                    <Input className="input-name" />
-                                </Form.Item>
-                            </Col>
-                        </Row>
+                    <Form.Item label="First Name" required={true} className="form-item-name"
+
+                        name="firstName"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your fist name!',
+                            },
+                        ]}
+                    >
+                        <Input className="input-name" />
+                    </Form.Item>
+
+                    <Form.Item
+                        className="form-item-name"
+                        name="lastName"
+                        label="Last Name"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your last name!',
+                            },
+                        ]}
+                    >
+                        <Input className="input-name" />
                     </Form.Item>
 
                     <Form.Item
@@ -156,6 +150,7 @@ const Register = () => {
                     </Form.Item>
 
                     <Form.Item
+                        className="form-item"
                         name="phoneNumber"
                         label="Phone Number"
                         rules={[
@@ -231,7 +226,7 @@ const Register = () => {
                 </Form>
 
             </div>
-        </body>
+        </div>
     );
 }
 

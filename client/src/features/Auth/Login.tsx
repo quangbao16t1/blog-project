@@ -30,9 +30,10 @@ const Login = () => {
     };
 
     return (
-        <body>
-            <div className="login-container">
-                <h1>Login</h1>
+        // <body>
+            <div className="container-login">
+                <div className="login-container">
+                <h1 >Login</h1>
                 <Form
                     name="formLogin"
                     className="login-form"
@@ -42,7 +43,7 @@ const Login = () => {
                     onFinish={sunmitt}
                 >
                     <Form.Item
-                        className="form-item"
+                        className="login-form-item"
                         name="email"
                         rules={[
                             {
@@ -54,7 +55,7 @@ const Login = () => {
                         <Input className="input-filed" type='email' prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Enter your email" />
                     </Form.Item>
                     <Form.Item
-                        className="form-item"
+                        className="login-form-item"
                         name="passwordHash"
                         rules={[
                             {
@@ -93,7 +94,8 @@ const Login = () => {
                     <GoogleOutlined className="icon-login" />
                 </div>
             </div>
-        </body>
+            </div>
+        // </body>
     );
 }
 

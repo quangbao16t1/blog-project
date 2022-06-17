@@ -13,6 +13,7 @@ import { CurrentUser } from 'types/auth.type';
 import ProfilePage from 'features/Profile/ProfilePage';
 import AdminRoutes  from 'routes/AdminRoutes';
 import CommentView from 'features/Comment/Comment';
+import PostDetail from 'features/Post/PostDetail';
 
 function App() {
 
@@ -43,9 +44,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path='/home' element={<Home />} />
+          <Route path='/post-detail' element={  <PostDetail />} />
           <Route path='/profile' element={<ProfilePage />}/>
         </Routes>
-        <Footer />
+        <Footer /> 
         {/* <AdminRoutes /> */}
         {/* <CommentView /> */}
       </BrowserRouter>
