@@ -118,6 +118,10 @@ p {
   transition: box-shadow 0.2s ease-in;
 }
 
+.btn-custom span svg {
+  transform: translateY(-3px);
+}
+
 .btn-search-home {
   height: 33px;
   border-radius: 8px;

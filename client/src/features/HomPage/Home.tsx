@@ -1,85 +1,85 @@
-import Footer from "components/Footer/Footer";
-import Header from "components/Header/Header";
 import { useEffect, useState } from "react";
-import StorageKeys from 'constants/storage-keys'
-import { CurrentUser } from "types/auth.type";
 import './Home.css'
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, List } from "antd";
 import { Col, Row } from "reactstrap";
 import girlImg from '../Profile/girl.jpg';
-import { CalendarOutlined, MessageOutlined, SearchOutlined, UserOutlined, WechatOutlined } from "@ant-design/icons";
-
+import { CalendarOutlined, MessageOutlined, RightOutlined, SearchOutlined, UserOutlined, WechatOutlined } from "@ant-design/icons";
+import { useAppDispatch, useAppSelector } from "app/hook";
+import { getPost, getPostId, postSelector } from "features/Post/postSlice";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
-    const [user, setUser] = useState();
-    // const userCu = props;
-    // console.log(userCu);
+    const natigave = useNavigate();
+    const dispatch = useAppDispatch();
+    const { postList } = useAppSelector(postSelector);
+
     useEffect(() => {
-        const bbbbb = localStorage.getItem(StorageKeys.user);
-        if (bbbbb) {
-            const userJson = (JSON.parse(bbbbb));
-            setUser(userJson);
-        }
-    }, []);
+        dispatch(getPost());
+    }, [])
+
+    const getPostDetail =  (id: any) => {
+        dispatch(getPostId(id)).then(() => {
+            natigave(`/post-detail/${id}`)
+        })
+    }
+    // const PostView = ({ post }: { post: Post}) => {
+    //     return (
+    //         <div className="bg-light border">
+    //             <div className="blog-entry">
+    //                 <img className="post-img" src={girlImg}></img>
+    //                 <div className="text">
+    //                     <h3 className="post-title"><a href="#">{post?.title}</a></h3>
+    //                     <div className="meta-wrap">
+    //                         <p className="meta">
+    //                             <span><CalendarOutlined className="icon-post" />{}</span>
+    //                             <span><MessageOutlined className="icon-post" />5 Comment</span>
+    //                         </p>
+    //                     </div>
+    //                     <p className="post-content">{post?.content}</p>
+    //                     <p><a href="#" className="btn-custom">Read More <span className="ion-ios-arrow-forward"></span></a></p>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     )
+    // }
+
+    // const PostList = ({ posts }: { posts: Post[] }) => (
+    //     <List
+    //         dataSource={posts}
+    //         header={`${posts.length} ${posts.length > 1 ? 'list' : 'list'}`}
+    //         itemLayout="horizontal"
+    //         renderItem={props => <PostView {...props} />}
+    //     />
+    // );
 
     return (
         <>
-            <div className="colorlib-main">
+            <div className="colorlib-main" style={{height: '100vh'}}>
                 <Row xs={3}>
                     <Col xs='2' ></Col>
                     <Col xs='8'>
                         <Row xs={2}>
                             <Col xs='8'>
                                 <div className="left-container">
-                                    <div className="bg-light border">
-                                        <div className="blog-entry">
-                                            <img className="post-img" src={girlImg}></img>
-                                            <div className="text">
-                                                <h3 className="post-title"><a href="#">You Can't Blame Gravity for Falling in Love</a></h3>
-                                                <div className="meta-wrap">
-                                                    <p className="meta">
-                                                        <span><CalendarOutlined className="icon-post" />June 28, 2019</span>
-                                                        <span><MessageOutlined className="icon-post" />5 Comment</span>
-                                                    </p>
+                                    { postList && postList.map((p) => (
+                                        <div key={p.id} className="bg-light border">
+                                            <div className="blog-entry">
+                                                <img className="post-img" src={girlImg}></img>
+                                                <div className="text">
+                                                    <h3 className="post-title"><a href="#">{p?.title}</a></h3>
+                                                    <div className="meta-wrap">
+                                                        <p className="meta">
+                                                            <span><CalendarOutlined className="icon-post" /><>{new Date(p.createAt).toISOString().slice(0, 10)}</></span>
+                                                            <span><MessageOutlined className="icon-post" />{p.countCmt} Comment</span>
+                                                        </p>
+                                                    </div>
+                                                    <p className="post-content">{p.content}</p>
+                                                    <p><a className="btn-custom" onClick={() => getPostDetail(p.id)}>Read More <RightOutlined /></a></p>
                                                 </div>
-                                                <p className="post-content">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                                <p><a href="#" className="btn-custom">Read More <span className="ion-ios-arrow-forward"></span></a></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="bg-light border">
-                                        <div className="blog-entry">
-                                            <img className="post-img" src={girlImg}></img>
-                                            <div className="text">
-                                                <h3 className="post-title"><a href="#">You Can't Blame Gravity for Falling in Love</a></h3>
-                                                <div className="meta-wrap">
-                                                    <p className="meta">
-                                                        <span><CalendarOutlined className="icon-post" />June 28, 2019</span>
-                                                        <span><MessageOutlined className="icon-post" />5 Comment</span>
-                                                    </p>
-                                                </div>
-                                                <p className="post-content">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                                <p><a href="#" className="btn-custom">Read More <span className="ion-ios-arrow-forward"></span></a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="bg-light border">
-                                        <div className="blog-entry">
-                                            <img className="post-img" src={girlImg}></img>
-                                            <div className="text">
-                                                <h3 className="post-title"><a href="#">You Can't Blame Gravity for Falling in Love</a></h3>
-                                                <div className="meta-wrap">
-                                                    <p className="meta">
-                                                        <span><CalendarOutlined className="icon-post" />June 28, 2019</span>
-                                                        <span><MessageOutlined className="icon-post" />5 Comment</span>
-                                                    </p>
-                                                </div>
-                                                <p className="post-content">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                                <p><a href="#" className="btn-custom">Read More <span className="ion-ios-arrow-forward"></span></a></p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </Col>
                             <Col xs='4'>
@@ -90,7 +90,7 @@ const Home = () => {
                                                 className="seach-item"
                                                 name="search"
                                                 rules={[
-                                                    {                               
+                                                    {
                                                         required: true,
                                                         message: 'Please enter a keyword!',
                                                     },
@@ -120,39 +120,21 @@ const Home = () => {
                                     </div>
                                     <div className="sidebar-box popular">
                                         <h3 className="sidebar-heading">Popular Articles</h3>
-                                        <div className="box-popular">
-                                            <img className="blog-img" src={girlImg}></img>
-                                            <div className="text">
-                                                <h3 className="heading"><a>Even the all-powerful Pointing has no control</a></h3>
-                                                <div className="meta">
-                                                    <div><a href="#"><CalendarOutlined className="icon-post" /> June 28, 2019</a></div>
-                                                    <div><a href="#"><UserOutlined className="icon-post" /> Dave Lewis</a></div>
-                                                    <div><a href="#"><MessageOutlined className="icon-post" /> 19</a></div>
+                                        {postList && postList.map((p) => (
+                                            p?.countCmt > 0 ? (
+                                                <div key={p.id} className="box-popular">
+                                                    <img className="blog-img" src={girlImg}></img>
+                                                    <div className="text">
+                                                        <h3 className="heading"><a>{p.title}</a></h3>
+                                                        <div className="meta">
+                                                            <div><a href="#"><CalendarOutlined className="icon-post" /> {new Date(p.createAt).toISOString().slice(0, 10)}</a></div>
+                                                            <div><a href="#"><UserOutlined className="icon-post" /> <>{p?.user?.firstName} {p?.user?.lastName}</> </a></div>
+                                                            <div><a href="#"><MessageOutlined className="icon-post" /> {p.countCmt}</a></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div className="box-popular">
-                                            <img className="blog-img" src={girlImg}></img>
-                                            <div className="text">
-                                                <h3 className="heading"><a>Even the all-powerful Pointing has no control</a></h3>
-                                                <div className="meta">
-                                                    <div><a href="#"><CalendarOutlined className="icon-post" /> June 28, 2019</a></div>
-                                                    <div><a href="#"><UserOutlined className="icon-post" /> Dave Lewis</a></div>
-                                                    <div><a href="#"><MessageOutlined className="icon-post" /> 19</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="box-popular">
-                                            <img className="blog-img" src={girlImg}></img>
-                                            <div className="text">
-                                                <h3 className="heading"><a>Even the all-powerful Pointing has no control</a></h3>
-                                                <div className="meta">
-                                                    <div><a href="#"><CalendarOutlined className="icon-post" /> June 28, 2019</a></div>
-                                                    <div><a href="#"><UserOutlined className="icon-post" /> Dave Lewis</a></div>
-                                                    <div><a href="#"><MessageOutlined className="icon-post" /> 19</a></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            ) : <></>
+                                        ))}
                                     </div>
                                 </div>
                             </Col>

@@ -20,12 +20,12 @@
     height: 600px;
     border-radius: 5%;
     border: 1px solid wheat;
-    background: blue;
+    background: aliceblue;
 }
 .login-container h1 {
     font-weight: 700;
     font-size: 35px;
-    color: white;
+    color: black;
 }
 .login-form {
     margin: 20px auto;

@@ -7,7 +7,8 @@ import {
     UserOutlined,
     WechatOutlined,
     HomeOutlined,
-    LogoutOutlined
+    LogoutOutlined,
+    FormOutlined
 } from '@ant-design/icons';
 import girlImg from './girl.jpg';
 import logo from './logo.png';
@@ -118,8 +119,17 @@ const Header = (props: any) => {
                                                 navigate('/profile')
                                             }}
                                         >
-                                            <i> <UserOutlined /> </i>
+                                            <i className='icon-header-hover'> <UserOutlined /> </i>
                                             Profile
+                                        </Button>
+                                        <Button
+                                            type='primary'
+                                            onClick={() => {
+                                                navigate('/new-post')
+                                            }}
+                                        >
+                                            <i className='icon-header-hover'> <FormOutlined /> </i>
+                                            New Post
                                         </Button>
                                         <Button
                                             className='btn-logout'
@@ -129,7 +139,7 @@ const Header = (props: any) => {
                                                 navigate('/login')
                                             }}
                                         >
-                                            <i> <LogoutOutlined /> </i>
+                                            <i className='icon-header-hover'> <LogoutOutlined /> </i>
                                             Logout
                                         </Button>
                                     </div>

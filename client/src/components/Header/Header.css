@@ -81,3 +81,6 @@
     flex-grow: 3;
     align-items: center;
 }
+.icon-header-hover span svg {
+    transform: translateY(-3px);
+}
